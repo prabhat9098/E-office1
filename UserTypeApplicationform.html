@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Application Form | E-Office Management</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
+  <style>
+    body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f1f3f6;
+  color: #002147;
+}
+
+.header {
+  background-color: #002147;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+.sidebar {
+  background-color: #1d3557;
+  width: 220px;
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  color: white;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  color: #dee2e6;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #002147;
+  color: #ffc107;
+}
+
+.main-content {
+  margin-left: 220px;
+  margin-top: 80px;
+  padding: 30px;
+}
+
+    .form-section {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-title {
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    .lang-selector,
+.language-selector {
+  width: 200px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar.mobile-show {
+  display: block !important;
+  z-index: 1050;
+  position: fixed;
+  left: 0;
+  top: 70px;
+  height: calc(100% - 70px);
+  width: 220px;
+  background-color: #1d3557;
+  transition: transform 0.3s ease-in-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+    <div class="d-flex align-items-center">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYiFdEW56wVH-LUuoUp7CmFzybzsFrSKDAOg&s" height="50" class="me-2" />
+      <h5 class="mb-0" data-translate="dashboardTitle">E-Office Management</h5>
+    </div>
+    <div class="d-flex align-items-center gap-3">
+      <select id="languageSelect" class="form-select form-select-sm">
+        <option value="en" data-translate="English">English</option>
+        <option value="hi" data-translate="हिन्दी">हिन्दी</option>
+        <option value="mr" data-translate="मराठी">मराठी</option>
+      </select>
+      <div class="dropdown">
+        <i class="bi bi-person-circle fs-3" data-bs-toggle="dropdown" style="cursor: pointer;"></i>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+        <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+        </ul>
+      </div>
+      <!-- Menu button (only visible on small screens) -->
+      <button
+      class="btn btn-outline-secondary d-md-none me-2"
+      id="menuToggle"
+    >
+      <i class="bi bi-list fs-4"></i>
+    </button>
+    </div>
+  </div>
+
+<!-- SIDEBAR -->
+<div class="sidebar">
+    <a href="UserTypeApplicationform.html" class="nav-link d-flex align-items-center active">
+      <i class="bi bi-file-earmark-text me-2 fs-5 "></i> 
+      <span data-translate="applicationForm">Application Form</span>
+    </a>
+    <a href="UserTypeApplications.html" class="nav-link d-flex align-items-center">
+      <i class="bi bi-folder-fill me-2 fs-5"></i> 
+      <span data-translate="applications">Applications</span>
+    </a>   
+  </div>
+
+  <div id="sidebarOverlay" class="overlay"></div>
+
+<!-- MAIN CONTENT -->
+<div class="main-content">
+  <div class="form-section">
+    <div class="form-title" data-translate="submitApplication">Submit New Application</div>
+
+    <form id="appForm">
+      <div class="row g-3">
+        <div class="col-md-6">
+            <label class="form-label" data-translate="applicationID">Application ID</label>
+          <input type="text" class="form-control" id="appId" readonly>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" data-translate="applicationDate">Date</label>
+            <input type="date" class="form-control" id="date" required>
+        </div>
+        <div class="col-md-3">
+            <label class="form-label" data-translate="applicationTime">Time</label>
+            <input type="time" class="form-control" id="time" required>
+        </div>
+
+        <div class="col-md-4">
+            <label class="form-label" data-translate="applicantName">Name of Applicant</label>
+            <input type="text" class="form-control" id="applicantName" required>
+        </div>
+
+        <div class="col-md-4">
+          <label class="form-label" data-translate="dateOfBirth">Date of Birth</label>
+          <input type="date" class="form-control" id="dateOfBirth" required>
+      </div>
+
+        <div class="col-md-4">
+            <label class="form-label" data-translate="contactNumber">Contact Number</label>
+            <input type="tel" class="form-control" id="phone" required>
+
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label" data-translate="subject">Subject</label>
+            <input type="text" class="form-control" id="subject" required>
+        </div>
+
+        <div class="col-md-12">
+            <label class="form-label" data-translate="address">Address</label>
+            <textarea class="form-control" id="address" rows="2" required></textarea>
+
+        </div>
+
+        <!-- State Dropdown -->
+      <div class="col-md-6">
+        <label class="form-label" data-translate="state">State</label>
+        <select class="form-select" id="state" required>
+          <option disabled selected>Select State</option>
+          <!-- States will be dynamically populated here -->
+        </select>
+      </div>
+
+      <!-- City Dropdown -->
+      <div class="col-md-6">
+        <label class="form-label" data-translate="city">City</label>
+        <select class="form-select" id="city" required>
+          <option disabled selected>Select City</option>
+          <!-- Cities will be dynamically populated here based on selected state -->
+        </select>
+      </div>
+
+      <!-- Pincode -->
+      <div class="col-md-6">
+        <label class="form-label" data-translate="pincode">Pincode</label>
+        <input type="text" class="form-control" id="pincode" required>
+      </div>
+
+        <div class="col-md-6">
+            <label class="form-label" data-translate="category">Category</label>
+            <select class="form-select" id="category" required>
+                <option disabled selected >Select Category</option>
+                <option data-translate="complaint">Complaint</option>
+                <option data-translate="request">Request</option>
+                <option data-translate="suggestion">Suggestion</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" data-translate="department">Department</label>
+            <select class="form-select" id="department" required>
+                <option disabled selected ">Select Department</option>
+                <option data-translate="education">Education</option>
+                <option data-translate="health">Health</option>
+                <option data-translate="publicWorks">Public Works</option>
+                <option data-translate="selfConstituency">Self Constituency</option>
+            </select>
+        </div>
+
+        <div class="col-md-6">
+          <label class="form-label" data-translate="applicationType">Application Type</label>
+          <select class="form-select" id="applicationType" required>
+            <option disabled selected>Select Type</option>
+            <option>General</option>
+            <option>VIP</option>
+            <option>VIP 1</option>
+            <option>VIP 2</option>
+            <option>VIP 3</option>
+            <!-- Add up to VIP 20+ -->
+            <option>VIP 20</option>
+            <option>VIP 21</option>
+            <option>VIP 22</option>
+          </select>
+          
+        </div>
+
+        <div class="col-md-6">
+            <label class="form-label" data-translate="uploadAttachment">Upload Attachment</label>
+            <input type="file" class="form-control" id="attachment" required>
+
+        </div>
+
+        
+
+      <div class="text-center mt-4">
+        
+        <button type="submit" class="btn btn-success mt-3 px-5">
+            <i class="bi bi-check-circle me-2"></i> <span data-translate="submitBtn">Submit Application</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+<!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const randomId = 'APP' + Math.floor(1000 + Math.random() * 9000);
+      document.getElementById('appId').value = randomId;
+  
+      const currentDate = new Date().toISOString().split('T')[0];
+      const currentTime = new Date().toTimeString().split(' ')[0].substring(0, 5);
+      document.getElementById('date').value = currentDate;
+      document.getElementById('time').value = currentTime;
+    });
+  
+    document.getElementById('appForm').addEventListener('submit', async function (e) {
+      e.preventDefault();
+      const ids=['appId','date','time','applicantName','phone','subject','address','state','city','pincode','dateOfBirth'];
+      const get=id=>document.getElementById(id)?.value||'';
+      const form=new FormData();
+      const fields={application_id:get('appId'),application_date:get('date'),application_time:get('time'),applicant_name:get('applicantName'),contact_number:get('phone'),subject:get('subject'),address:get('address'),state:get('state'),city:get('city'),pincode:get('pincode'),dob:get('dateOfBirth'),category_id:get('category'),department_id:get('department'),applicant_type_id:get('applicationType')};
+      Object.entries(fields).forEach(([k,v])=>form.append(k,v));
+      const file=document.getElementById('attachment').files[0];if(file)form.append('attachment',file);
+      try {
+       const r=await fetch('/api/applications',{method:'POST',body:form});const x=await r.json();if(!r.ok||!x.success)throw new Error(x.message||'Submission failed');
+       alert('Application '+x.application_id+' submitted successfully!');this.reset();document.getElementById('appId').value='USR'+Date.now().toString().slice(-9);
+      }catch(err){alert(err.message);}
+    });
+  </script>
+  
+<script src="Assets/Language/i18n.js"></script>
+
+<script type="module">
+    import statesAndCities from './Services/statesAndCities.js'; // Adjust path if needed
+  
+    // Populate State dropdown dynamically
+    console.log(statesAndCities);  // Check if the object is loaded correctly
+  
+    const stateDropdown = document.getElementById('state');
+    Object.keys(statesAndCities).forEach(state => {
+      const option = document.createElement('option');
+      option.value = state;
+      option.textContent = state;
+      stateDropdown.appendChild(option);
+    });
+  
+    // Populate City dropdown based on selected state
+    const cityDropdown = document.getElementById('city');
+    stateDropdown.addEventListener('change', function() {
+      const selectedState = this.value;
+      const cities = statesAndCities[selectedState] || [];
+      
+      // Clear existing options in city dropdown
+      cityDropdown.innerHTML = '<option disabled selected>Select City</option>';
+  
+      // Add cities to dropdown
+      cities.forEach(city => {
+        const option = document.createElement('option');
+        option.value = city;
+        option.textContent = city;
+        cityDropdown.appendChild(option);
+      });
+    });
+  </script>
+<script>
+  // Redirect to login if user is not logged in
+  if (!localStorage.getItem("user")) {
+    window.location.href = "index.html";
+  }
+
+  // Disable back button after logout
+  window.history.pushState(null, "", window.location.href);
+  window.onpopstate = function () {
+    window.history.pushState(null, "", window.location.href);
+  };
+</script>
+
+<script>
+  document.getElementById("logoutBtn").addEventListener("click", function (e) {
+    e.preventDefault();
+
+    // Clear any session/local storage if needed
+    localStorage.clear();
+    sessionStorage.clear();
+
+    // Redirect to login page
+    window.location.href = "index.html"; // Replace with your actual login page
+  });
+</script>
+<script>
+  const menuToggle = document.getElementById("menuToggle");
+  const sidebar = document.querySelector(".sidebar");
+  const overlay = document.getElementById("sidebarOverlay");
+
+  menuToggle.addEventListener("click", () => {
+    sidebar.classList.toggle("mobile-show");
+    overlay.classList.toggle("show");
+  });
+
+  overlay.addEventListener("click", () => {
+    sidebar.classList.remove("mobile-show");
+    overlay.classList.remove("show");
+  });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+
+<script>
+ document.addEventListener('DOMContentLoaded',async()=>{
+  for(const [id,api] of [['category','/api/categories'],['department','/api/departments'],['applicationType','/api/applicant_types']]){
+   const el=document.getElementById(id);if(!el)continue;
+   try {const r=await fetch(api);const x=await r.json();if(x.success){el.innerHTML='<option disabled selected value="">Select</option>'+x.data.map(v=>`<option value="${v.id}">${v.name}</option>`).join('');}}
+   catch(e){console.error('Dropdown failed',e)}
+  }
+ });
+</script>
+<script src="Assets/demo.js"></script>
+</body>
+</html>

@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>माननीय मंत्री.श्री संजय शिरसाट यांचे कार्यालय: ई-ऑफिस</title>
+    <!-- Favicon -->
+  <link rel="icon" href="Assets/Images/logo3.png" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+  font-family: "Segoe UI", sans-serif;
+  background-color: #f1f3f6;
+  color: #002147;
+}
+
+.header {
+  background-color: #002147;
+  height: 70px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  color: #ffffff;
+}
+
+.sidebar {
+  background-color: #1d3557;
+  width: 220px;
+  position: fixed;
+  top: 70px;
+  bottom: 0;
+  color: white;
+  padding-top: 20px;
+}
+
+.sidebar a {
+  color: #dee2e6;
+  padding: 12px 20px;
+  display: block;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background-color: #002147;
+  color: #ffc107;
+}
+
+.main-content {
+  margin-left: 220px;
+  margin-top: 80px;
+  padding: 30px;
+}
+
+    .form-section {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .form-title {
+      margin-bottom: 25px;
+      font-weight: 600;
+      font-size: 1.3rem;
+    }
+
+    .lang-selector,
+.language-selector {
+  width: 200px;
+  border: 1px solid #ced4da;
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .main-content {
+    margin-left: 0;
+    padding: 20px;
+  }
+  .sidebar {
+    display: none;
+  }
+}
+
+.sidebar.mobile-show {
+  display: block !important;
+  z-index: 1050;
+  position: fixed;
+  left: 0;
+  top: 70px;
+  height: calc(100% - 70px);
+  width: 220px;
+  background-color: #1d3557;
+  transition: transform 0.3s ease-in-out;
+}
+
+.overlay {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 70px);
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1040;
+  display: none;
+}
+
+.overlay.show {
+  display: block;
+}
+    </style>
+  </head>
+  <body>
+    <!-- Header -->
+    <div class="header">
+      <div class="d-flex align-items-center">
+        <img
+          src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQYiFdEW56wVH-LUuoUp7CmFzybzsFrSKDAOg&s"
+          height="50"
+          class="me-2"
+        />
+        <h5 class="mb-0" data-translate="dashboardTitle">
+          E-Office Management
+        </h5>
+      </div>
+      <div class="d-flex align-items-center gap-3">
+        <select id="languageSelect" class="form-select form-select-sm">
+          <option value="en" data-translate="English">English</option>
+          <option value="hi" data-translate="हिन्दी">हिन्दी</option>
+          <option value="mr" data-translate="मराठी">मराठी</option>
+        </select>
+        <div class="dropdown">
+          <i
+            class="bi bi-person-circle fs-3"
+            data-bs-toggle="dropdown"
+            style="cursor: pointer"
+          ></i>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <!-- <li><a class="dropdown-item" href="#">Profile</a></li> -->
+            <li><a class="dropdown-item" href="#" id="logoutBtn">Logout</a></li>
+          </ul>
+        </div>
+        <!-- Menu button (only visible on small screens) -->
+        <button
+          class="btn btn-outline-secondary d-md-none me-2"
+          id="menuToggle"
+        >
+          <i class="bi bi-list fs-4"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <a href="dashboard.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-house-door-fill me-2 fs-5"></i>
+        <span data-translate="dashboard">Dashboard</span>
+      </a>
+      <a href="adduser.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-person-plus-fill me-2 fs-5"></i>
+        <span data-translate="addUser">Add User</span>
+      </a>
+      <a href="applicationform.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-file-earmark-text me-2 fs-5"></i>
+        <span data-translate="applicationForm">Application Form</span>
+      </a>
+      <a href="outWardForm.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-file-earmark-text me-2 fs-5"></i>
+        <span data-translate="outwardForm">OutWard Form</span>
+      </a>
+      <a href="applications.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-folder-fill me-2 fs-5"></i>
+        <span data-translate="applications">Applications</span>
+      </a>
+      <a
+        href="CategoryManagement.html"
+        class="nav-link d-flex align-items-center active"
+      >
+        <i class="bi bi-tags-fill me-2 fs-5"></i>
+        <span data-translate="categoryManagement">Category Management</span>
+      </a>
+      <a href="userdata.html" class="nav-link d-flex align-items-center">
+        <i class="bi bi-folder-fill me-2 fs-5"></i>
+        <span data-translate="user_data">User Data</span>
+      </a>
+    </div>
+
+    <div id="sidebarOverlay" class="overlay"></div>
+
+    <!-- Main Dashboard -->
+    <div class="main-content">
+      <h3 class="mb-4" data-translate="categoryManagement">
+        Category Management
+      </h3>
+
+      
+      <!-- Category Form -->
+      <form id="categoryForm" class="row g-2 mb-3">
+        <div class="col-md-10">
+        <input
+          type="text"
+          id="categoryName"
+          class="form-control"
+          placeholder="Enter Category Name"
+          required
+          data-translate="enter_category_name"
+        />
+      </div>
+      <div class="col-md-2">
+        <button
+          type="submit"
+          class="btn btn-primary w-100"
+          data-translate="add_category"
+        >
+          Add Category
+        </button>
+      </div>
+      </form>
+
+      <!-- Category Table -->
+      <table class="table table-bordered" >
+        <thead>
+          <tr>
+            <th data-translate="serial_number">#</th>
+            <th data-translate="category_name">Category Name</th>
+            <th data-translate="actions">Actions</th>
+          </tr>
+        </thead>
+        <tbody id="categoryTable"></tbody>
+      </table>
+
+      <!-- Edit Modal -->
+      <div class="modal fade" id="editCategoryModal" tabindex="-1">
+        <div class="modal-dialog">
+          <form id="editCategoryForm" class="modal-content p-3">
+            <h5 class="modal-title mb-3" data-translate="edit_category">
+              Edit Category
+            </h5>
+            <input
+              type="text"
+              id="editCategoryName"
+              class="form-control"
+              required
+              data-translate="category_name"
+            />
+            <div class="mt-3 text-end">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+                data-translate="cancel"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="btn btn-success"
+                data-translate="save"
+              >
+                Save
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Department Section -->
+<section class="mb-5">
+  <h4 data-translate="department">Departments</h4>
+
+  <!-- Department Form -->
+  <form id="departmentForm" class="row g-2 mb-3">
+    <div class="col-md-10">
+      <input
+        type="text"
+        id="departmentInput"
+        class="form-control"
+        placeholder="Enter Department Name"
+        required
+        data-translate="enter_department_name"
+      />
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100" data-translate="add_department">
+        Add <i class="bi bi-plus-circle me-1"></i>
+      </button>
+    </div>
+  </form>
+
+  <!-- Department Table -->
+  <table class="table table-bordered" >
+    <thead>
+      <tr>
+        <th data-translate="serial_number">#</th>
+        <th data-translate="department_name">Department Name</th>
+        <th data-translate="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody id="departmentTable"></tbody>
+  </table>
+</section>
+
+<!-- Edit Department Modal -->
+<div class="modal fade" id="editDepartmentModal" tabindex="-1" aria-labelledby="editDepartmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="editDepartmentForm" class="modal-content p-3">
+      <h5 class="modal-title mb-3" id="editDepartmentModalLabel" data-translate="edit_department">Edit Department</h5>
+      <input
+        type="text"
+        id="editDepartmentName"
+        class="form-control"
+        required
+        placeholder="Enter Department Name"
+        data-translate="department_name"
+      />
+      <div class="mt-3 text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="cancel">Cancel</button>
+        <button type="submit" class="btn btn-success" data-translate="save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+     <!-- Application Type Section -->
+<section>
+  <h4 data-translate="applicationType">Application Types</h4>
+  <form id="applicationTypeForm" class="row g-2 mb-3">
+    <div class="col-md-10">
+      <input
+        type="text"
+        id="applicationTypeInput"
+        class="form-control"
+        placeholder="Add Applicant Type"
+        required
+      />
+    </div>
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-primary w-100" data-translate="add_typeofapplication">
+        Add <i class="bi bi-plus-circle me-1"></i>
+      </button>
+    </div>
+  </form>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th data-translate="applicationType">Application Type</th>
+        <th data-translate="actions">Actions</th>
+      </tr>
+    </thead>
+    <tbody  id="applicationTypeTable"></tbody>
+  </table>
+</section>
+
+
+<!-- Edit Application Type Modal -->
+<div class="modal fade" id="editApplicationTypeModal" tabindex="-1" aria-labelledby="editApplicationTypeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <form id="editApplicationTypeForm" class="modal-content p-3">
+      <h5 class="modal-title mb-3" id="editApplicationTypeModalLabel" data-translate="edit_application_type">Edit Application Type</h5>
+      <input
+        type="text"
+        id="editApplicationTypeName"
+        class="form-control"
+        required
+        placeholder="Enter Application Type Name"
+        data-translate="application_type_name"
+      />
+      <div class="mt-3 text-end">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-translate="cancel">Cancel</button>
+        <button type="submit" class="btn btn-success" data-translate="save">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+    <script src="Apis/category-api.js"></script>
+    <script src="Apis/departmen-api.js"></script>
+    <script src="Apis/applicationtype-api.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // Redirect to login if user is not logged in
+      if (!localStorage.getItem("user")) {
+        window.location.href = "index.html";
+      }
+
+      // Disable back button after logout
+      window.history.pushState(null, "", window.location.href);
+      window.onpopstate = function () {
+        window.history.pushState(null, "", window.location.href);
+      };
+    </script>
+
+    <script>
+      document
+        .getElementById("logoutBtn")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+
+          // Clear any session/local storage if needed
+          localStorage.clear();
+          sessionStorage.clear();
+
+          // Redirect to login page
+          window.location.href = "index.html"; // Replace with your actual login page
+        });
+    </script>
+
+    <script>
+      const menuToggle = document.getElementById("menuToggle");
+      const sidebar = document.querySelector(".sidebar");
+      const overlay = document.getElementById("sidebarOverlay");
+
+      menuToggle.addEventListener("click", () => {
+        sidebar.classList.toggle("mobile-show");
+        overlay.classList.toggle("show");
+      });
+
+      overlay.addEventListener("click", () => {
+        sidebar.classList.remove("mobile-show");
+        overlay.classList.remove("show");
+      });
+    </script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const userType = localStorage.getItem("usertype");
+
+    // Check if usertype is 'User'
+    if (userType === "user") {
+      // Redirect to error page
+      window.location.href = "error.html";  // Redirect to error page
+    }
+  });
+</script>
+
+    <script src="Assets/Language/i18n.js"></script>
+    
+  <script src="Assets/demo.js"></script>
+</body>
+</html>

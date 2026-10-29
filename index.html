@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>माननीय मंत्री.श्री संजय शिरसाट यांचे कार्यालय: ई-ऑफिस - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Favicon -->
+  <link rel="icon" href="Assets/Images/logo3.png" type="image/png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary-color: #1d3557;
+        --secondary-color: #002147;
+        --text-light: #ffffff;
+      }
+    
+      body,
+      html {
+        height: 100%;
+        margin: 0;
+        font-family: "Segoe UI", sans-serif;
+        background-color: var(--secondary-color);
+      }
+    
+      .login-container {
+        height: 100vh;
+        display: flex;
+      }
+    
+      .login-img {
+        background: url("Assets/Images/person.jpg") no-repeat center center;
+        background-size: 60%;
+        background-color: var(--primary-color);
+        color: var(--text-light);
+        flex: 1;
+      }
+    
+      .login-img h5,
+      .login-img small {
+        color: var(--text-light);
+      }
+    
+      .login-form {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #f1f1f1;
+        color: var(--text-light);
+      }
+    
+      .form-box {
+        width: 80%;
+        max-width: 400px;
+      }
+    
+      .card {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+      }
+    
+      .form-control {
+        background-color: #f1f1f1;
+      }
+    
+      .btn-primary {
+        background-color: var(--secondary-color);
+        border: none;
+      }
+    
+      .btn-success {
+        background-color: var(--primary-color);
+        border: none;
+      }
+    
+      .form-select {
+        background-color: #f1f1f1;
+      }
+    
+      .form-label,
+      .form-check-label {
+        color: var(--text-light);
+      }
+    
+      .modal-content {
+        background-color: var(--primary-color);
+        color: var(--text-light);
+      }
+    
+      .btn-close {
+        filter: invert(1);
+      }
+    
+      @media (max-width: 768px) {
+        .login-container {
+          flex-direction: column;
+        }
+    
+        .login-img {
+          height: 300px;
+          flex: none;
+          width: 100%;
+        }
+    
+        .login-form {
+          flex: none;
+          width: 100%;
+        }
+      }
+    </style>
+    
+  </head>
+  <body>
+    <!-- Heading Section -->
+    
+    <div class="login-container">
+      <div class="login-img d-flex flex-column justify-content-end text-center text-white p-3">
+        <div class="bg-dark bg-opacity-50 rounded-3 p-2">
+          <h5 class="mb-1" style="font-weight: bold;" data-translate="ministerName">Hon. Shri. Sanjay Shirsat</h5>
+          <small data-translate="ministerDesignation">(Minister for Social Justice and Guardian Minister, Chhatrapati Sambhajinagar)</small>
+        </div>
+        
+      </div>
+      
+      <div class="login-form d-flex align-items-center justify-content-center p-3" style="flex: 1;">
+        <div class="w-100 text-center mb-5" style="max-width: 450px; margin-top: 15%;">
+          
+            <!-- Logo section -->
+            <div class="d-flex justify-content-center align-items-center gap-3 mb-4 px-3">
+              <img src="Assets/Images/logo3.png" alt="Logo 3" style="height: 120px;" />
+              
+              <!-- Vertical Line -->
+              <div style="width: 1px; height: 60px; background-color: #000;"></div>
+              
+              <img src="Assets/Images/logo2.png" alt="Logo 2" style="height: 120px;" />
+            </div>
+        
+          
+        <div class="card shadow-lg w-100" style="max-width: 450px; margin-top: 0%;">
+          <div class="card-body">
+            <div class="form-box px-4 mx-auto">
+          <h4 class="text-center mb-4 " style="font-weight: 100; font-size: medium;" data-translate="heading">E-Office of Hon ble Minister for Social Justice Assistance Department and Gaurdian Minister Chhatrapati Sambhajinagar</h4>
+          <h3 class="mb-3 text-center" id="loginHeader" ></h3>
+
+          <div class="mb-3">
+            <select id="languageSelect" class="form-select form-select-sm">
+              <option value="en" data-translate="English">English</option>
+              <option value="hi" data-translate="हिन्दी">हिन्दी</option>
+              <option value="mr" data-translate="मराठी">मराठी</option>
+            </select>
+          </div>
+
+          <!-- Switch for Admin/User -->
+          <div class="form-check form-switch mb-4 text-end">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              id="loginModeSwitch"
+            />
+            <label class="form-check-label" for="loginModeSwitch" id="switchLabel" data-translate="switchToUserLogin">Switch to User Login</label>
+          </div>
+
+          <!-- Admin Login -->
+          <div id="adminLogin">
+            <div class="mb-3">
+              <label class="form-label" id="adminEmailLabel" data-translate="emailLabel">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="adminEmail"
+                placeholder="Enter email"
+              />
+            </div>
+            <div class="mb-3">
+              <label class="form-label" id="adminPasswordLabel" data-translate="passwordLabel">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                id="adminPassword"
+                placeholder="Enter password"
+              />
+            </div>
+            <button class="btn btn-primary w-100" onclick="adminLogin()" data-translate="loginBtn">
+              Login
+            </button>
+          </div>
+
+          <!-- User Login -->
+          <div id="userLogin" style="display: none">
+            <div class="mb-3">
+              <label class="form-label" id="phoneLabel" data-translate="phoneNumberLabel">Phone Number</label>
+              <input
+                type="text"
+                class="form-control"
+                id="phoneNumber"
+                placeholder="Enter your registered phone number"
+                maxlength="10"
+              />
+              <div id="phoneError" class="text-danger mt-1" style="font-size: 0.9rem;"></div>
+            </div>
+            <button
+              class="btn btn-success w-100"
+              id="getOtpBtn"
+              onclick="sendOtp()"
+              disabled
+              data-translate="getOtpBtn"
+            >
+              Get OTP
+            </button>
+          </div>
+        </div>
+      </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTP Modal -->
+    <div
+      class="modal fade"
+      id="otpModal"
+      tabindex="-1"
+      aria-labelledby="otpModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <h5 class="modal-title" id="otpModalLabel">Enter OTP</h5>
+          <div class="modal-body">
+            <input
+              type="text"
+              class="form-control mb-3"
+              id="otpInput"
+              placeholder="Enter OTP"
+            />
+            <button class="btn btn-primary w-100" onclick="verifyOtp()">
+              Verify OTP
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div class="position-fixed top-0 end-0 p-3" style="z-index: 1055">
+      <div id="toastMessage" class="toast align-items-center text-white bg-primary border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="toastText">
+            <!-- Toast message here -->
+          </div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <script src="Assets/Language/i18n.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Services/toast.js"></script>
+    <script src="Apis/adminLogin.js"></script>
+
+    <script>
+      const mockDatabase = ["9876543210", "9123456789"]; // Demo staff accounts
+      let generatedOtp = "";
+
+      // Redirect if already logged in
+        if (localStorage.getItem("user")) {
+          const userType = localStorage.getItem("usertype"); // Retrieve the user type
+          if (userType === "admin") {
+            window.location.href = "applicationform.html"; // Redirect to the Admin dashboard
+          } else if (userType === "user") {
+            window.location.href = "UserTypeApplicationform.html"; // Redirect to User's application form
+          }
+        }
+
+
+      // Toggle login mode
+      document
+        .getElementById("loginModeSwitch")
+        .addEventListener("change", function () {
+          const isUser = this.checked;
+          document.getElementById("adminLogin").style.display = isUser
+            ? "none"
+            : "block";
+          document.getElementById("userLogin").style.display = isUser
+            ? "block"
+            : "none";
+
+          // Update the header and switch text
+          const loginHeader = document.getElementById("loginHeader");
+          const switchLabel = document.getElementById("switchLabel");
+
+          if (isUser) {
+            
+            switchLabel.textContent = "Switch to Admin Login";
+            
+          } else {
+            
+            switchLabel.textContent = "Switch to User Login";
+          }
+        });
+
+      
+
+      // Real-time phone validation
+      document.getElementById("phoneNumber").addEventListener("input", function () {
+        const number = this.value.trim();
+        const errorDiv = document.getElementById("phoneError");
+        const otpBtn = document.getElementById("getOtpBtn");
+
+        if (number.length === 10) {
+          if (!number.match(/^\d{10}$/)) {
+            errorDiv.textContent = "Please enter only numeric digits.";
+            otpBtn.disabled = true;
+          } else if (!mockDatabase.includes(number)) {
+            errorDiv.textContent = "You are not a registered user. Please contact admin.";
+            otpBtn.disabled = true;
+          } else {
+            errorDiv.textContent = "";
+            otpBtn.disabled = false;
+          }
+        } else {
+          errorDiv.textContent = number.length > 0 ? "Enter a 10-digit number." : "";
+          otpBtn.disabled = true;
+        }
+      });
+
+
+      // Send OTP
+      function sendOtp() {
+        generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+        generatedOtp = "123456"; alert("DEMO MODE: enter OTP 123456 (no SMS is sent).");
+        new bootstrap.Modal(document.getElementById("otpModal")).show();
+      }
+
+      // Verify OTP
+      async function verifyOtp() {
+       const enteredOtp=document.getElementById('otpInput').value.trim();
+       const phone=document.getElementById('phoneNumber').value.trim();
+       try {
+        const response=await fetch('/api/auth/demo-user',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({phone,otp:enteredOtp})});
+        const result=await response.json();if(!response.ok||!result.success)throw new Error(result.message||'Invalid OTP');
+        localStorage.setItem('user',phone);localStorage.setItem('usertype','user');
+        window.location.href='UserTypeApplicationform.html';
+       }catch(error){alert(error.message);}
+      }
+
+    </script>
+  <script src="Assets/demo.js"></script>
+</body>
+</html>
